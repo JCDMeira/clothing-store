@@ -1,17 +1,23 @@
 import { create } from "zustand";
 import { ProductModel } from "../model";
-import { getProducts } from "../Api";
+import { getOneProduct, getProducts } from "../Api";
 
 type Store = {
   products: ProductModel[];
+  product: ProductModel;
+  getOneProduct: (id: string) => void;
   getProducts: () => void;
 };
 
 export const useProductsStore = create<Store>()((set) => ({
   products: [],
+  product: {} as ProductModel,
   getProducts: async () => {
     const products = await getProducts();
-    console.log(products);
     set({ products });
+  },
+  getOneProduct: async (id: string) => {
+    const product = await getOneProduct(id);
+    set({ product });
   },
 }));
