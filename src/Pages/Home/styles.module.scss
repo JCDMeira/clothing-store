@@ -56,10 +56,11 @@ $secundary-color: #424251;
   font-size: 2.6rem;
 }
 
-.contrat-white {
+.contrast-white {
   margin-top: 3rem;
   text-align: center;
   font-size: 1.6rem;
+  line-height: 150%;
   color: #fff;
   max-width: 500px;
 }
@@ -87,7 +88,7 @@ $secundary-color: #424251;
     border: none;
     padding: 24px;
     border-radius: 12px;
-    font-size: 1rem;
+    font-size: 1.6rem;
     color: $primary-color;
     text-shadow: rgba(196 196 196 / 51%) 2px 2px 4px;
     cursor: pointer;

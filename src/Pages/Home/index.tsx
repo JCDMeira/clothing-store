@@ -1,7 +1,9 @@
 import React from "react";
 import Styles from "./styles.module.scss";
+import { useNavigate } from "react-router-dom";
 
 export const Home: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className={Styles.wrapper}>
       <div className={Styles.content}>
@@ -11,7 +13,7 @@ export const Home: React.FC = () => {
           </div>
         </div>
 
-        <h1 className={Styles["contrat-white"]}>
+        <h1 className={Styles["contrast-white"]}>
           E aqui, cada costura é uma história, e nós estamos prontos para contar
           a sua através das suas roupas personalizadas.
         </h1>
@@ -19,7 +21,9 @@ export const Home: React.FC = () => {
 
       <div className={Styles["cta-wrapper"]}>
         <div />
-        <button>Conheça nossa linhas</button>
+        <button onClick={() => navigate("/products")}>
+          Conheça nossa linhas
+        </button>
       </div>
     </div>
   );
