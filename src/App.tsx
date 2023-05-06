@@ -1,7 +1,9 @@
+import { RouteSelect } from "./Routes";
+
 function App() {
   return (
     <>
-      <h1>Teste</h1>
+      <RouteSelect />
     </>
   );
 }
