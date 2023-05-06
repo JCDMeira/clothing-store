@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useProductsStore } from "../../Stores";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export const ProductDetail: React.FC = () => {
   const product = useProductsStore((state) => state.product);
@@ -14,6 +14,7 @@ export const ProductDetail: React.FC = () => {
 
   return (
     <div>
+      <Link to={"/products"}>Voltar</Link>
       <h1>{product.title}</h1>
     </div>
   );
