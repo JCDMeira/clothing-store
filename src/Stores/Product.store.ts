@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import { ProductModel } from "../model";
-import { getOneProduct, getProducts } from "../Api";
+import { ProductCreateModel, ProductModel } from "../model";
+import { createProduct, getOneProduct, getProducts } from "../Api";
 
 type Store = {
   products: ProductModel[];
@@ -19,5 +19,10 @@ export const useProductsStore = create<Store>()((set) => ({
   getOneProduct: async (id: string) => {
     const product = await getOneProduct(id);
     set({ product });
+  },
+  createProduct: async (body: ProductCreateModel) => {
+    createProduct(body).then((res) => {
+      set((state) => ({ products: [...state.products, res] }));
+    });
   },
 }));

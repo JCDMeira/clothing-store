@@ -7,3 +7,8 @@ export interface ProductModel {
   created_at: number;
   updated_at: number;
 }
+
+export interface ProductCreateModel {
+  title: string;
+  price: number;
+}
