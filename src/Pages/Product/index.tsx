@@ -1,27 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
-import { getProducts } from "../../Api";
-import { ProductModel } from "../../model";
+import { useProductsStore } from "../../Stores";
 
 export const Product: React.FC = () => {
-  const [products, setProducts] = useState<ProductModel[]>([]);
+  const products = useProductsStore((state) => state.products);
+  const getProducts = useProductsStore((state) => state.getProducts);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const products = await getProducts();
-
-      setProducts(products);
-    };
-
-    fetchData();
-  }, []);
+    getProducts();
+  }, [getProducts]);
 
   return (
     <div>
       <h1>Produtos</h1>
 
       {products.map((product) => (
-        <p>{product.title}</p>
+        <p key={product._id}>{product.title}</p>
       ))}
     </div>
   );
