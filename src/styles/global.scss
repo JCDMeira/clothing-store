@@ -107,6 +107,7 @@ section {
   display: block;
 }
 body {
+  box-sizing: border-box;
   line-height: 1;
 }
 ol,
@@ -127,4 +128,22 @@ q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Pacifico, sans-serif;
+}
+
+span,
+button,
+p,
+small,
+ol,
+li {
+  font-family: Lato, sans-serif;
 }
