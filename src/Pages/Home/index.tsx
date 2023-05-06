@@ -1,10 +1,9 @@
 import React from "react";
-
-// import { Container } from './styles';
+import Styles from "./styles.module.scss";
 
 export const Home: React.FC = () => {
   return (
-    <div>
+    <div className={Styles.wrapper}>
       <h1>Home</h1>
     </div>
   );
