@@ -6,10 +6,12 @@ import {
   GridValueGetterParams,
 } from "@mui/x-data-grid";
 import { useProductsStore } from "../../Stores";
+import { ProductModel } from "../../model";
 
 export const ProductAdmin: React.FC = () => {
   const products = useProductsStore((state) => state.products);
   const getProducts = useProductsStore((state) => state.getProducts);
+  const deletProduct = useProductsStore((state) => state.deletProduct);
 
   useEffect(() => {
     getProducts();
@@ -45,18 +47,18 @@ export const ProductAdmin: React.FC = () => {
         flex: 1,
         align: "center",
         headerAlign: "center",
-        renderCell: (params: GridRenderCellParams) => (
+        renderCell: (params: GridRenderCellParams<ProductModel>) => (
           <div>
-            <button onClick={() => console.log("delete", params)}>Edit</button>
-
-            <button onClick={() => console.log("delete", params)}>
-              Delete
+            <button onClick={() => console.log("edit", params.row._id)}>
+              Edit
             </button>
+
+            <button onClick={() => deletProduct(params.row._id)}>Delete</button>
           </div>
         ),
       },
     ],
-    []
+    [deletProduct]
   );
 
   return (
