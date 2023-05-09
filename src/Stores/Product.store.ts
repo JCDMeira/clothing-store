@@ -12,6 +12,10 @@ type Store = {
   product: ProductModel;
   getOneProduct: (id: string) => void;
   getProducts: () => void;
+  createProduct: (body: ProductCreateModel) => Promise<{
+    message: string;
+    product: ProductModel;
+  }>;
   deletProduct: (id: string) => void;
 };
 
@@ -27,9 +31,11 @@ export const useProductsStore = create<Store>()((set) => ({
     set({ product });
   },
   createProduct: async (body: ProductCreateModel) => {
-    createProduct(body).then((res) => {
-      set((state) => ({ products: [...state.products, res] }));
-    });
+    const newProduct = await createProduct(body);
+
+    set((state) => ({ products: [...state.products, newProduct.product] }));
+
+    return newProduct;
   },
   deletProduct: async (id: string) => {
     deleteProduct(id).then(() =>
