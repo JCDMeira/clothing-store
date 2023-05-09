@@ -36,6 +36,8 @@ export const CreateProduct: React.FC = () => {
     <div>
       <h1>Cadastrar novo produto</h1>
 
+      <button onClick={() => navigate("/admin")}>Voltar</button>
+
       <form onSubmit={onSubmit}>
         <TextField
           label="Título"
