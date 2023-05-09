@@ -7,11 +7,14 @@ import {
 } from "@mui/x-data-grid";
 import { useProductsStore } from "../../Stores";
 import { ProductModel } from "../../model";
+import { useNavigate } from "react-router-dom";
 
 export const ProductAdmin: React.FC = () => {
   const products = useProductsStore((state) => state.products);
   const getProducts = useProductsStore((state) => state.getProducts);
   const deletProduct = useProductsStore((state) => state.deletProduct);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     getProducts();
@@ -67,7 +70,7 @@ export const ProductAdmin: React.FC = () => {
 
       <br />
 
-      <button>Criar novo item</button>
+      <button onClick={() => navigate("create")}>Criar novo item</button>
       <br />
       <br />
       <br />
