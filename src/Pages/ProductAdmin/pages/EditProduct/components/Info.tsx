@@ -1,11 +1,13 @@
-import { TextField } from "@mui/material";
 import React, { SyntheticEvent, useState } from "react";
-import { InputNumer } from "../../../Components";
-import { useProductsStore } from "../../../Stores";
+import { TextField } from "@mui/material";
+import { useProductsStore } from "../../../../../Stores";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ProductModel } from "../../../model";
+import { ProductModel } from "../../../../../model";
+import { InputNumer } from "../../../../../Components";
 
-export const EditProduct: React.FC = () => {
+// import { Container } from './styles';
+
+export const Info: React.FC = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const Product: ProductModel = state.product;
@@ -41,12 +43,7 @@ export const EditProduct: React.FC = () => {
 
   return (
     <div>
-      <h1>Editar produto</h1>
-
-      <button onClick={() => navigate("/admin")}>Voltar</button>
-
       <form onSubmit={onSubmit}>
-        ''
         <TextField
           label="Título"
           name="title"
