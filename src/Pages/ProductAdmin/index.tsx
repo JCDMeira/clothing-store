@@ -17,8 +17,10 @@ export const ProductAdmin: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getProducts();
-  }, [getProducts]);
+    if (products.length === 0) {
+      getProducts();
+    }
+  }, [getProducts, products.length]);
 
   const columns: GridColDef[] = useMemo(
     () => [
@@ -52,7 +54,13 @@ export const ProductAdmin: React.FC = () => {
         headerAlign: "center",
         renderCell: (params: GridRenderCellParams<ProductModel>) => (
           <div>
-            <button onClick={() => console.log("edit", params.row._id)}>
+            <button
+              onClick={() =>
+                navigate(`edit/${params.row._id}`, {
+                  state: { product: params.row },
+                })
+              }
+            >
               Edit
             </button>
 
@@ -61,7 +69,7 @@ export const ProductAdmin: React.FC = () => {
         ),
       },
     ],
-    [deletProduct]
+    [deletProduct, navigate]
   );
 
   return (

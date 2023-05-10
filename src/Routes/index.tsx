@@ -1,7 +1,7 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { Home, Product, ProductDetail } from "../Pages";
 import { ProductAdmin } from "../Pages/ProductAdmin";
-import { CreateProduct } from "../Pages/ProductAdmin/pages";
+import { CreateProduct, EditProduct } from "../Pages/ProductAdmin/pages";
 
 export const RouteSelect = () => {
   return (
@@ -14,6 +14,7 @@ export const RouteSelect = () => {
         <Route path="/admin">
           <Route path="" element={<ProductAdmin />} />
           <Route path="create" element={<CreateProduct />} />
+          <Route path="edit/:id" element={<EditProduct />} />
         </Route>
         <Route path="*" element={<Home />} />
       </Routes>

@@ -2,13 +2,20 @@ import { TextField } from "@mui/material";
 import React, { SyntheticEvent, useState } from "react";
 import { InputNumer } from "../../../Components";
 import { useProductsStore } from "../../../Stores";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { ProductModel } from "../../../model";
 
-export const CreateProduct: React.FC = () => {
+export const EditProduct: React.FC = () => {
   const navigate = useNavigate();
-  const createProduct = useProductsStore((state) => state.createProduct);
+  const { state } = useLocation();
+  const Product: ProductModel = state.product;
 
-  const [productForm, setProductForm] = useState({ title: "", price: "" });
+  const editProduct = useProductsStore((state) => state.editProduct);
+
+  const [productForm, setProductForm] = useState({
+    ...Product,
+    price: String(Product.price),
+  });
 
   const onChange = ({
     target: { name, value },
@@ -25,8 +32,8 @@ export const CreateProduct: React.FC = () => {
     )
       return;
 
-    createProduct({
-      title: productForm.title,
+    editProduct({
+      ...productForm,
       price: Number(productForm.price),
     });
     navigate("/admin");
@@ -34,11 +41,12 @@ export const CreateProduct: React.FC = () => {
 
   return (
     <div>
-      <h1>Cadastrar novo produto</h1>
+      <h1>Editar produto</h1>
 
       <button onClick={() => navigate("/admin")}>Voltar</button>
 
       <form onSubmit={onSubmit}>
+        ''
         <TextField
           label="Título"
           name="title"
@@ -58,7 +66,7 @@ export const CreateProduct: React.FC = () => {
           }}
           variant="outlined"
         />
-        <button type="submit">Cadastrar</button>
+        <button type="submit">Editar</button>
       </form>
     </div>
   );
