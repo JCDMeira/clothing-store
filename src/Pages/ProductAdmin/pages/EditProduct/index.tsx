@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Tabs from "@mui/base/Tabs";
 import * as S from "./styles";
 import { Info } from "./components/Info";
+import { Sets } from "./components/sets";
 
 export const EditProduct: React.FC = () => {
   const navigate = useNavigate();
@@ -22,7 +23,9 @@ export const EditProduct: React.FC = () => {
         <S.StyledTabPanel value={0}>
           <Info />
         </S.StyledTabPanel>
-        <S.StyledTabPanel value={1}>Profile page</S.StyledTabPanel>
+        <S.StyledTabPanel value={1}>
+          <Sets />
+        </S.StyledTabPanel>
         <S.StyledTabPanel value={2}>Language page</S.StyledTabPanel>
       </Tabs>
     </div>
