@@ -1,12 +1,17 @@
 export interface ProductModel {
   _id: string;
   title: string;
-  modifiers: string[];
-  sets: string[];
+  modifiers: SetsAndModifiers[];
+  sets: SetsAndModifiers[];
   price: number;
   created_at: number;
   updated_at: number;
 }
+
+type SetsAndModifiers = {
+  title: string;
+  price: number;
+};
 
 export interface ProductCreateModel {
   title: string;
