@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState } from "react";
+import React, { SyntheticEvent, useEffect, useState } from "react";
 import { TextField } from "@mui/material";
 import { useProductsStore } from "../../../../../Stores";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -10,9 +10,20 @@ import { InputNumer } from "../../../../../Components";
 export const Info: React.FC = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const Product: ProductModel = state.product;
+  // const { id } = useParams<{ id: string }>();
+  const Product: ProductModel = state?.product || {};
 
   const editProduct = useProductsStore((state) => state.editProduct);
+  // const product = useProductsStore((state) => state.product);
+  // const getOneProduct = useProductsStore((state) => state.getOneProduct);
+
+  // useEffect(() => {
+  //   if (state?.product) getOneProduct(id as string);
+  // }, [getOneProduct, id, state?.product]);
+
+  useEffect(() => {
+    if (!state?.product) navigate("/admin");
+  }, [navigate, state?.product]);
 
   const [productForm, setProductForm] = useState({
     ...Product,
