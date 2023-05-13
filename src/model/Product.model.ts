@@ -8,7 +8,7 @@ export interface ProductModel {
   updated_at: number;
 }
 
-type SetsAndModifiers = {
+export type SetsAndModifiers = {
   title: string;
   price: number;
 };

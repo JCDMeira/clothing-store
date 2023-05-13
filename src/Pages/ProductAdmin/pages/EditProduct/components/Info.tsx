@@ -1,7 +1,7 @@
-import React, { SyntheticEvent, useEffect, useState } from "react";
+import React, { SyntheticEvent, useCallback, useEffect, useState } from "react";
 import { TextField } from "@mui/material";
 import { useProductsStore } from "../../../../../Stores";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { ProductModel } from "../../../../../model";
 import { InputNumer } from "../../../../../Components";
 
@@ -10,47 +10,55 @@ import { InputNumer } from "../../../../../Components";
 export const Info: React.FC = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
-  // const { id } = useParams<{ id: string }>();
+  const { id } = useParams<{ id: string }>();
   const Product: ProductModel = state?.product || {};
 
   const editProduct = useProductsStore((state) => state.editProduct);
-  // const product = useProductsStore((state) => state.product);
-  // const getOneProduct = useProductsStore((state) => state.getOneProduct);
+  const product = useProductsStore((state) => state.product);
+  const getOneProduct = useProductsStore((state) => state.getOneProduct);
 
-  // useEffect(() => {
-  //   if (state?.product) getOneProduct(id as string);
-  // }, [getOneProduct, id, state?.product]);
+  const [productForm, setProductForm] = useState(
+    !state?.product
+      ? ({} as ProductModel)
+      : {
+          ...Product,
+          price: String(Product.price),
+        }
+  );
 
   useEffect(() => {
-    if (!state?.product) navigate("/admin");
-  }, [navigate, state?.product]);
+    if (!state?.product && id !== product?._id) {
+      getOneProduct(id as string);
+    }
+    if (product?._id)
+      setProductForm({ ...product, price: String(product.price) });
+  }, [getOneProduct, id, product, state?.product]);
 
-  const [productForm, setProductForm] = useState({
-    ...Product,
-    price: String(Product.price),
-  });
+  const onChange = useCallback(
+    ({ target: { name, value } }: React.ChangeEvent<HTMLInputElement>) =>
+      setProductForm((current) => ({ ...current, [name]: value })),
+    []
+  );
 
-  const onChange = ({
-    target: { name, value },
-  }: React.ChangeEvent<HTMLInputElement>) =>
-    setProductForm((current) => ({ ...current, [name]: value }));
+  const onSubmit = useCallback(
+    (e: SyntheticEvent) => {
+      e.preventDefault();
 
-  const onSubmit = (e: SyntheticEvent) => {
-    e.preventDefault();
+      if (
+        productForm.title === "" ||
+        productForm.price === "" ||
+        productForm.price === "0.00"
+      )
+        return;
 
-    if (
-      productForm.title === "" ||
-      productForm.price === "" ||
-      productForm.price === "0.00"
-    )
-      return;
-
-    editProduct({
-      ...productForm,
-      price: Number(productForm.price),
-    });
-    navigate("/admin");
-  };
+      editProduct({
+        ...productForm,
+        price: Number(productForm.price),
+      });
+      navigate("/admin");
+    },
+    [editProduct, navigate, productForm]
+  );
 
   return (
     <div>

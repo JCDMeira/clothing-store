@@ -1,63 +1,83 @@
-import React, { SyntheticEvent, useState } from "react";
+import React, { SyntheticEvent, useCallback, useEffect, useState } from "react";
 import { useProductsStore } from "../../../../../Stores";
-import { useLocation } from "react-router-dom";
-import { ProductModel } from "../../../../../model";
+import { useLocation, useParams } from "react-router-dom";
+import { ProductModel, SetsAndModifiers } from "../../../../../model";
 import { TextField } from "@mui/material";
 import { InputNumer } from "../../../../../Components";
 
 export const Sets: React.FC = () => {
   const { state } = useLocation();
-  // const { id } = useParams<{ id: string }>();
-  const Product: ProductModel = state.product;
+  const { id } = useParams<{ id: string }>();
+  const Product: ProductModel = state?.product || {};
 
   const editProduct = useProductsStore((state) => state.editProduct);
-  // const product = useProductsStore((state) => state.product);
-  // const getOneProduct = useProductsStore((state) => state.getOneProduct);
+  const product = useProductsStore((state) => state.product);
+  const getOneProduct = useProductsStore((state) => state.getOneProduct);
 
-  // useEffect(() => {
-  //   if (!state?.product) getOneProduct(id as string);
-  // }, [getOneProduct, id, state?.product]);
+  const [currentSets, setCurrentSet] = useState(
+    Product?.sets || ([] as SetsAndModifiers[])
+  );
 
-  const [currentSets, setCurrentSet] = useState(Product?.sets);
   const [formSets, SetFormSets] = useState({
     title: "",
     price: "",
   });
 
-  const onChange = ({
-    target: { name, value },
-  }: React.ChangeEvent<HTMLInputElement>) =>
-    SetFormSets((current) => ({ ...current, [name]: value }));
+  useEffect(() => {
+    if (!state?.product && id !== product?._id) {
+      getOneProduct(id as string);
+    }
+    if (product?._id) setCurrentSet(product.sets);
+  }, [getOneProduct, id, product, state?.product]);
 
-  const onSubmit = (e: SyntheticEvent) => {
-    e.preventDefault();
+  const onChange = useCallback(
+    ({ target: { name, value } }: React.ChangeEvent<HTMLInputElement>) =>
+      SetFormSets((current) => ({ ...current, [name]: value })),
+    []
+  );
 
-    if (
-      formSets.title === "" ||
-      formSets.price === "" ||
-      formSets.price === "0.00"
-    )
-      return;
+  const onSubmit = useCallback(
+    (e: SyntheticEvent) => {
+      e.preventDefault();
 
-    editProduct({
-      ...Product,
-      sets: [
-        ...Product.sets,
+      if (
+        formSets.title === "" ||
+        formSets.price === "" ||
+        formSets.price === "0.00"
+      )
+        return;
+
+      const newProduct = !state?.product
+        ? {
+            ...product,
+            sets: [
+              ...product.sets,
+              { title: formSets.title, price: Number(formSets.price) },
+            ],
+          }
+        : {
+            ...Product,
+            sets: [
+              ...Product.sets,
+              { title: formSets.title, price: Number(formSets.price) },
+            ],
+          };
+
+      editProduct(newProduct);
+
+      window.history.pushState(
+        { ...Product, sets: [...currentSets, formSets] },
+        "",
+        undefined
+      );
+
+      setCurrentSet((current) => [
+        ...current,
         { title: formSets.title, price: Number(formSets.price) },
-      ],
-    });
-
-    window.history.pushState(
-      { ...Product, sets: [...currentSets, formSets] },
-      "",
-      undefined
-    );
-
-    setCurrentSet((current) => [
-      ...current,
-      { title: formSets.title, price: Number(formSets.price) },
-    ]);
-  };
+      ]);
+    },
+    [Product, currentSets, editProduct, formSets, product, state?.product]
+  );
 
   return (
     <div>
@@ -86,7 +106,7 @@ export const Sets: React.FC = () => {
 
       <div>
         {currentSets.map((set) => (
-          <h1>
+          <h1 key={set.title + set.price}>
             {set.title} - R$ {set.price.toFixed(2)}
           </h1>
         ))}

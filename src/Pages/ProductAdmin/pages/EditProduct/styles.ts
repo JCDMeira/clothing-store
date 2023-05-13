@@ -4,6 +4,7 @@ import { buttonClasses } from "@mui/base/Button";
 import Tab, { tabClasses } from "@mui/base/Tab";
 import { styled } from "@mui/system";
 
+//@ pesquisar como criar objetos assim com scss variables
 export const green = {
   50: "#F2F5F3",
   100: "#E0E8DF",

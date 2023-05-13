@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { NumericFormat, NumericFormatProps } from "react-number-format";
 
 interface CustomProps {
@@ -6,7 +6,7 @@ interface CustomProps {
   name: string;
 }
 
-export const InputNumer = React.forwardRef<NumericFormatProps, CustomProps>(
+const InputNumer = React.forwardRef<NumericFormatProps, CustomProps>(
   function NumericFormatCustom(props, ref) {
     const { onChange, ...other } = props;
 
@@ -32,3 +32,6 @@ export const InputNumer = React.forwardRef<NumericFormatProps, CustomProps>(
     );
   }
 );
+
+// eslint-disable-next-line react-refresh/only-export-components
+export default memo(InputNumer);
