@@ -14,9 +14,7 @@ export const Sets: React.FC = () => {
   const product = useProductsStore((state) => state.product);
   const getOneProduct = useProductsStore((state) => state.getOneProduct);
 
-  const [currentSets, setCurrentSet] = useState(
-    Product?.sets || ([] as SetsAndModifiers[])
-  );
+  const [currentSets, setCurrentSet] = useState(Product?.sets || []);
 
   const [formSets, SetFormSets] = useState({
     title: "",
@@ -65,18 +63,14 @@ export const Sets: React.FC = () => {
 
       editProduct(newProduct);
 
-      window.history.pushState(
-        { ...Product, sets: [...currentSets, formSets] },
-        "",
-        undefined
-      );
+      window.history.pushState({ ...newProduct }, "", undefined);
 
       setCurrentSet((current) => [
         ...current,
         { title: formSets.title, price: Number(formSets.price) },
       ]);
     },
-    [Product, currentSets, editProduct, formSets, product, state?.product]
+    [Product, editProduct, formSets, product, state?.product]
   );
 
   return (
@@ -106,7 +100,7 @@ export const Sets: React.FC = () => {
 
       <div>
         {currentSets.map((set) => (
-          <h1 key={set.title + set.price}>
+          <h1 key={set.title + set.price + Math.random()}>
             {set.title} - R$ {set.price.toFixed(2)}
           </h1>
         ))}
