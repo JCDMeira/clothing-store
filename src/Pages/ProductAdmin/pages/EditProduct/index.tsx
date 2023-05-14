@@ -4,6 +4,7 @@ import Tabs from "@mui/base/Tabs";
 import * as S from "./styles";
 import { Info } from "./components/Info";
 import { Sets } from "./components/sets";
+import { Modifiers } from "./components/Modifiers";
 
 export const EditProduct: React.FC = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ export const EditProduct: React.FC = () => {
         <S.StyledTabsList>
           <S.StyledTab value={0}>Informações gerais</S.StyledTab>
           <S.StyledTab value={1}>Conjuntos promocionais</S.StyledTab>
-          <S.StyledTab value={2}>Alterações</S.StyledTab>
+          <S.StyledTab value={2}>Moficações comuns</S.StyledTab>
         </S.StyledTabsList>
         <S.StyledTabPanel value={0}>
           <Info />
@@ -26,7 +27,9 @@ export const EditProduct: React.FC = () => {
         <S.StyledTabPanel value={1}>
           <Sets />
         </S.StyledTabPanel>
-        <S.StyledTabPanel value={2}>Language page</S.StyledTabPanel>
+        <S.StyledTabPanel value={2}>
+          <Modifiers />
+        </S.StyledTabPanel>
       </Tabs>
     </div>
   );

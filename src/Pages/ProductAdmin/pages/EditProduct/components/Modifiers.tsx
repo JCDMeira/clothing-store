@@ -5,7 +5,7 @@ import { ProductModel } from "../../../../../model";
 import { TextField } from "@mui/material";
 import { InputNumer } from "../../../../../Components";
 
-export const Sets: React.FC = () => {
+export const Modifiers: React.FC = () => {
   const { state } = useLocation();
   const { id } = useParams<{ id: string }>();
   const Product: ProductModel = state?.product;
@@ -14,9 +14,11 @@ export const Sets: React.FC = () => {
   const product = useProductsStore((state) => state.product);
   const getOneProduct = useProductsStore((state) => state.getOneProduct);
 
-  const [currentSets, setCurrentSet] = useState(Product?.sets || []);
+  const [currentModifiers, setCurrentModifiers] = useState(
+    Product?.modifiers || []
+  );
 
-  const [formSets, SetFormSets] = useState({
+  const [formModifiers, SetFormModifiers] = useState({
     title: "",
     price: "",
   });
@@ -25,12 +27,12 @@ export const Sets: React.FC = () => {
     if (!state?.product && id !== product?._id) {
       getOneProduct(id as string);
     }
-    if (product?._id) setCurrentSet(product.sets);
+    if (product?._id) setCurrentModifiers(product.modifiers);
   }, [getOneProduct, id, product, state?.product]);
 
   const onChange = useCallback(
     ({ target: { name, value } }: React.ChangeEvent<HTMLInputElement>) =>
-      SetFormSets((current) => ({ ...current, [name]: value })),
+      SetFormModifiers((current) => ({ ...current, [name]: value })),
     []
   );
 
@@ -39,25 +41,31 @@ export const Sets: React.FC = () => {
       e.preventDefault();
 
       if (
-        formSets.title === "" ||
-        formSets.price === "" ||
-        formSets.price === "0.00"
+        formModifiers.title === "" ||
+        formModifiers.price === "" ||
+        formModifiers.price === "0.00"
       )
         return;
 
       const newProduct = !state?.product
         ? {
             ...product,
-            sets: [
-              ...product.sets,
-              { title: formSets.title, price: Number(formSets.price) },
+            modifiers: [
+              ...product.modifiers,
+              {
+                title: formModifiers.title,
+                price: Number(formModifiers.price),
+              },
             ],
           }
         : {
             ...Product,
-            sets: [
-              ...Product.sets,
-              { title: formSets.title, price: Number(formSets.price) },
+            modifiers: [
+              ...Product.modifiers,
+              {
+                title: formModifiers.title,
+                price: Number(formModifiers.price),
+              },
             ],
           };
 
@@ -65,12 +73,12 @@ export const Sets: React.FC = () => {
 
       window.history.pushState({ ...newProduct }, "", undefined);
 
-      setCurrentSet((current) => [
+      setCurrentModifiers((current) => [
         ...current,
-        { title: formSets.title, price: Number(formSets.price) },
+        { title: formModifiers.title, price: Number(formModifiers.price) },
       ]);
     },
-    [Product, editProduct, formSets, product, state?.product]
+    [Product, editProduct, formModifiers, product, state?.product]
   );
 
   return (
@@ -80,13 +88,13 @@ export const Sets: React.FC = () => {
           label="Título"
           name="title"
           variant="outlined"
-          value={formSets.title}
+          value={formModifiers.title}
           onChange={onChange}
         />
         <TextField
           name={"price"}
           label={"Preço"}
-          value={formSets.price}
+          value={formModifiers.price}
           onChange={onChange}
           id="formatted-numberformat-input"
           InputProps={{
@@ -99,7 +107,7 @@ export const Sets: React.FC = () => {
       </form>
 
       <div>
-        {currentSets.map((set) => (
+        {currentModifiers.map((set) => (
           <h1 key={set.title + set.price + Math.random()}>
             {set.title} - R$ {set.price.toFixed(2)}
           </h1>
