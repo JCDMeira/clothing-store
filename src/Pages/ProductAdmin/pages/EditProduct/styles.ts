@@ -3,33 +3,7 @@ import TabPanel from "@mui/base/TabPanel";
 import { buttonClasses } from "@mui/base/Button";
 import Tab, { tabClasses } from "@mui/base/Tab";
 import { styled } from "@mui/system";
-
-//@ pesquisar como criar objetos assim com scss variables
-export const green = {
-  50: "#F2F5F3",
-  100: "#E0E8DF",
-  200: "#C2D2C1",
-  300: "#A5BDA2",
-  400: "#87A883",
-  500: "#9daca2",
-  600: "#5E7F5E",
-  700: "#4A6649",
-  800: "#364D34",
-  900: "#22361F",
-};
-
-export const grey = {
-  50: "#f7f7f7",
-  100: "#ebebeb",
-  200: "#d4d4d4",
-  300: "#bcbcbc",
-  400: "#8f8f8f",
-  500: "#424251",
-  600: "#747474",
-  700: "#5f5f5f",
-  800: "#4b4b4b",
-  900: "#363636",
-};
+import { primaryColor, SecondaruColor } from "../../../../styles/_colors.ts";
 
 export const StyledTab = styled(Tab)`
   font-family: IBM Plex Sans, sans-serif;
@@ -47,17 +21,17 @@ export const StyledTab = styled(Tab)`
   justify-content: center;
 
   &:hover {
-    background-color: ${green[400]};
+    background-color: ${primaryColor[400]};
   }
 
   &:focus {
     color: #fff;
-    outline: 3px solid ${green[200]};
+    outline: 3px solid ${primaryColor[200]};
   }
 
   &.${tabClasses.selected} {
     background-color: #fff;
-    color: ${green[600]};
+    color: ${primaryColor[600]};
   }
 
   &.${buttonClasses.disabled} {
@@ -72,8 +46,10 @@ export const StyledTabPanel = styled(TabPanel)(
   font-family: IBM Plex Sans, sans-serif;
   font-size: 0.875rem;
   padding: 20px 12px;
-  background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
-  border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
+  background: ${theme.palette.mode === "dark" ? SecondaruColor[900] : "#fff"};
+  border: 1px solid ${
+    theme.palette.mode === "dark" ? SecondaruColor[700] : SecondaruColor[200]
+  };
   border-radius: 12px;
   opacity: 0.6;
   `
@@ -82,7 +58,7 @@ export const StyledTabPanel = styled(TabPanel)(
 export const StyledTabsList = styled(TabsList)(
   ({ theme }) => `
   min-width: 400px;
-  background-color: ${green[500]};
+  background-color: ${primaryColor[500]};
   border-radius: 12px;
   margin-bottom: 16px;
   display: flex;
@@ -90,7 +66,7 @@ export const StyledTabsList = styled(TabsList)(
   justify-content: center;
   align-content: space-between;
   box-shadow: 0px 4px 30px ${
-    theme.palette.mode === "dark" ? grey[900] : grey[200]
+    theme.palette.mode === "dark" ? SecondaruColor[900] : SecondaruColor[200]
   };
   `
 );
