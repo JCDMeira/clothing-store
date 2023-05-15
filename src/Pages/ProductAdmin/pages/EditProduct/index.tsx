@@ -2,9 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Tabs from "@mui/base/Tabs";
 import * as S from "./styles";
-import { Info } from "./components/Info";
-import { Sets } from "./components/sets";
-import { Modifiers } from "./components/Modifiers";
+import { Info, Modifiers, Sets } from "./components";
 
 export const EditProduct: React.FC = () => {
   const navigate = useNavigate();
