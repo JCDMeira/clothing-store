@@ -33,6 +33,14 @@ export const ProductAdmin: React.FC = () => {
         editable: false,
       },
       {
+        field: "photo",
+        headerName: "URL da imagem",
+        flex: 1,
+        align: "center",
+        headerAlign: "center",
+        editable: false,
+      },
+      {
         field: "price",
         headerName: "Preço",
         type: "number",

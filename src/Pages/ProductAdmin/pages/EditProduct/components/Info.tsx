@@ -71,6 +71,13 @@ export const Info: React.FC = () => {
           onChange={onChange}
         />
         <TextField
+          label="Url da imagem"
+          name="photo"
+          variant="outlined"
+          value={productForm.photo}
+          onChange={onChange}
+        />
+        <TextField
           name={"price"}
           label={"Preço"}
           value={productForm.price}

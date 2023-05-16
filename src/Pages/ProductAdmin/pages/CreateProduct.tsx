@@ -8,7 +8,11 @@ export const CreateProduct: React.FC = () => {
   const navigate = useNavigate();
   const createProduct = useProductsStore((state) => state.createProduct);
 
-  const [productForm, setProductForm] = useState({ title: "", price: "" });
+  const [productForm, setProductForm] = useState({
+    title: "",
+    photo: "",
+    price: "",
+  });
 
   const onChange = ({
     target: { name, value },
@@ -26,7 +30,7 @@ export const CreateProduct: React.FC = () => {
       return;
 
     createProduct({
-      title: productForm.title,
+      ...productForm,
       price: Number(productForm.price),
     });
     navigate("/admin");
@@ -44,6 +48,13 @@ export const CreateProduct: React.FC = () => {
           name="title"
           variant="outlined"
           value={productForm.title}
+          onChange={onChange}
+        />
+        <TextField
+          label="Url da imagem"
+          name="photo"
+          variant="outlined"
+          value={productForm.photo}
           onChange={onChange}
         />
         <TextField
