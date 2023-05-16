@@ -7,9 +7,11 @@ type TitleProps = {
   children: ReactNode;
 };
 
-const Title: React.FC<TitleProps> = ({ variant, children, ...props }) => {
+export const Title: React.FC<TitleProps> = ({
+  variant,
+  children,
+  ...props
+}) => {
   const Component = variant;
   return <Component {...props}>{children}</Component>;
 };
-
-export default Title;

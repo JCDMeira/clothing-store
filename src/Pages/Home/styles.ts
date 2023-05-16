@@ -1,16 +1,20 @@
-$primary-color: #9daca2;
-$secundary-color: #424251;
+import styled from "styled-components";
+import {
+  primaryColor,
+  SecondaryColor,
+  neutralHight,
+} from "../../styles/_colors";
 
-.wrapper {
+export const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: $primary-color;
+  background-color: ${primaryColor[500]};
 
   display: flex;
   flex-direction: row;
-}
+`;
 
-.content {
+export const Content = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -23,9 +27,9 @@ $secundary-color: #424251;
     #424251 50%,
     #222221 100%
   );
-}
+`;
 
-.cloud {
+export const Cloud = styled.div`
   width: 556px;
   height: 290px;
   clip-path: path(
@@ -41,10 +45,10 @@ $secundary-color: #424251;
     #8fa69b 83.33%,
     #89a499 100%
   );
-  color: $secundary-color;
+  color: ${SecondaryColor[500]};
 
   div {
-    margin-top: 50px;
+    margin-top: 65px;
     width: 420px;
     height: 100px;
     text-align: center;
@@ -54,18 +58,18 @@ $secundary-color: #424251;
   align-items: center;
 
   font-size: 2.6rem;
-}
+`;
 
-.contrast-white {
+export const ContrastWhite = styled.h1`
   margin-top: 3rem;
   text-align: center;
   font-size: 1.6rem;
   line-height: 150%;
-  color: #fff;
+  color: ${neutralHight[50]};
   max-width: 500px;
-}
+`;
 
-.cta-wrapper {
+export const CtaWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -84,17 +88,17 @@ $secundary-color: #424251;
 
   button {
     z-index: 10;
-    background-color: $secundary-color;
+    background-color: ${SecondaryColor[500]};
     border: none;
     padding: 24px;
     border-radius: 12px;
     font-size: 1.6rem;
-    color: $primary-color;
+    color: ${primaryColor[500]};
     text-shadow: rgba(196 196 196 / 51%) 2px 2px 4px;
     cursor: pointer;
 
     &:hover {
-      color: #fff;
+      color: ${neutralHight[50]};
     }
   }
-}
+`;

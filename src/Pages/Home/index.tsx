@@ -1,30 +1,33 @@
 import React from "react";
-import Styles from "./styles.module.scss";
 import { useNavigate } from "react-router-dom";
+import { Title } from "../../Components";
+import * as S from "./styles";
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();
   return (
-    <div className={Styles.wrapper}>
-      <div className={Styles.content}>
-        <div className={Styles.cloud}>
+    <S.Wrapper>
+      <S.Content>
+        <S.Cloud>
           <div>
-            <h1>Porque sua roupa sempre tem algo a contar</h1>
+            <Title variant={"h1"}>
+              Porque sua roupa sempre tem algo a contar
+            </Title>
           </div>
-        </div>
+        </S.Cloud>
 
-        <h1 className={Styles["contrast-white"]}>
+        <S.ContrastWhite>
           E aqui, cada costura é uma história, e nós estamos prontos para contar
           a sua através das suas roupas personalizadas.
-        </h1>
-      </div>
+        </S.ContrastWhite>
+      </S.Content>
 
-      <div className={Styles["cta-wrapper"]}>
+      <S.CtaWrapper>
         <div />
         <button onClick={() => navigate("/products")}>
           Conheça nossa linhas
         </button>
-      </div>
-    </div>
+      </S.CtaWrapper>
+    </S.Wrapper>
   );
 };

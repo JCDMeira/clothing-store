@@ -11,7 +11,7 @@ export const primaryColor = {
   900: "#22361F",
 };
 
-export const SecondaruColor = {
+export const SecondaryColor = {
   50: "#f7f7f7",
   100: "#ebebeb",
   200: "#d4d4d4",
@@ -22,4 +22,17 @@ export const SecondaruColor = {
   700: "#5f5f5f",
   800: "#4b4b4b",
   900: "#363636",
+};
+
+export const neutralHight = {
+  50: "#ffffff",
+  100: "#fafafa",
+  200: "#f5f5f5",
+  300: "#f0f0f0",
+  400: "#eaeaea",
+  500: "#e3e3e3",
+  600: "#dddddd",
+  700: "#d6d6d6",
+  800: "#d0d0d0",
+  900: "#c9c9c9",
 };
