@@ -1,5 +1,5 @@
 import { RouteSelect } from "./Routes";
-import "./styles/global.scss";
+import "./styles/global.css";
 
 function App() {
   return (
