@@ -20,11 +20,13 @@
     "react-dom": "^18.2.0",
     "react-number-format": "^5.1.4",
     "react-router-dom": "^6.11.1",
+    "styled-components": "^6.0.0-rc.1",
     "zustand": "^4.3.8"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",
     "@vitejs/plugin-react": "^4.0.0",
