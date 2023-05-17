@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import {
   primaryColor,
   SecondaryColor,
@@ -69,7 +69,20 @@ export const ContrastWhite = styled.h1`
   max-width: 500px;
 `;
 
-export const CtaWrapper = styled.div`
+export const Separate = styled.div`
+  background: radial-gradient(
+    circle at center,
+    #cfa8ce,
+    #c092bd,
+    #b57eac,
+    #a16b9c,
+    #8d578b
+  );
+  width: 17.5%;
+  height: 100vh;
+`;
+
+export const CtaWrapper = styled.div<{ img: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,14 +90,16 @@ export const CtaWrapper = styled.div`
   position: relative;
   overflow: hidden;
 
-  div {
-    position: absolute;
-    width: 120%;
-    height: 100%;
-    background-image: url("../../Assets/blazer.avif");
-    transform: rotate(3deg);
-    opacity: 0.2;
-  }
+  ${({ img }) => css`
+    div {
+      position: absolute;
+      width: 120%;
+      height: 100%;
+      background-image: url(${img});
+      transform: rotate(3deg);
+      opacity: 0.2;
+    }
+  `}
 
   button {
     z-index: 10;

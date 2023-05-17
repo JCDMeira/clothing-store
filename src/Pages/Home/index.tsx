@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Title } from "../../Components";
 import * as S from "./styles";
+import blazer from "../../Assets/blazer.avif";
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -22,7 +23,9 @@ export const Home: React.FC = () => {
         </S.ContrastWhite>
       </S.Content>
 
-      <S.CtaWrapper>
+      <S.Separate />
+
+      <S.CtaWrapper img={blazer}>
         <div />
         <button onClick={() => navigate("/products")}>
           Conheça nossa linhas

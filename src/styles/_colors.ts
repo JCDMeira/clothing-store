@@ -24,6 +24,19 @@ export const SecondaryColor = {
   900: "#363636",
 };
 
+export const TertiaryColor = {
+  50: "#F5F2F8",
+  100: "#ECE0F1",
+  200: "#DEBCDF",
+  300: "#CFA8CE",
+  400: "#C092BD",
+  500: "#B57EAC",
+  600: "#A16B9C",
+  700: "#8D578B",
+  800: "#79347B",
+  900: "#65106A",
+};
+
 export const neutralHight = {
   50: "#ffffff",
   100: "#fafafa",
