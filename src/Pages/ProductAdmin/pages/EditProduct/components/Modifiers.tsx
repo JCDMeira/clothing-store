@@ -107,10 +107,11 @@ export const Modifiers: React.FC = () => {
       </form>
 
       <div>
-        {currentModifiers.map((set) => (
-          <h1 key={set.title + set.price + Math.random()}>
-            {set.title} - R$ {set.price.toFixed(2)}
-          </h1>
+        <h1 style={{ margin: "50px" }}>Modificações comuns</h1>
+        {currentModifiers.map((mod) => (
+          <span key={mod.title + mod.price + Math.random()}>
+            {mod.title} - R$ {mod.price.toFixed(2)}
+          </span>
         ))}
       </div>
     </div>

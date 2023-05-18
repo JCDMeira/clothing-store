@@ -99,10 +99,12 @@ export const Sets: React.FC = () => {
       </form>
 
       <div>
+        <h1 style={{ margin: "50px" }}>Conjuntos possíveis</h1>
+
         {currentSets.map((set) => (
-          <h1 key={set.title + set.price + Math.random()}>
+          <span key={set.title + set.price + Math.random()}>
             {set.title} - R$ {set.price.toFixed(2)}
-          </h1>
+          </span>
         ))}
       </div>
     </div>
