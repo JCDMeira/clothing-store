@@ -4,5 +4,11 @@ import { ProductModel } from "../../model";
 export const getProducts = async () => {
   const { data } = await api.get<ProductModel[]>("/product");
 
-  return data;
+  const formatedData = data.map((product) => ({
+    ...product,
+    title: product.title[0].toUpperCase() + product.title.substr(1),
+  }));
+  console.log(formatedData);
+
+  return formatedData;
 };
