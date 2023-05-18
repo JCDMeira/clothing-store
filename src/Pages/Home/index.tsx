@@ -23,8 +23,6 @@ export const Home: React.FC = () => {
         </S.ContrastWhite>
       </S.Content>
 
-      <S.Separate />
-
       <S.CtaWrapper img={blazer}>
         <div />
         <button onClick={() => navigate("/products")}>
