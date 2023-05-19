@@ -3,6 +3,8 @@ import React, { SyntheticEvent, useState } from "react";
 import { InputNumer } from "../../../Components";
 import { useProductsStore } from "../../../Stores";
 import { useNavigate } from "react-router-dom";
+import { S_Header, S_Wrapper } from "../../../styles/components";
+import * as S from "../styled";
 
 export const CreateProduct: React.FC = () => {
   const navigate = useNavigate();
@@ -37,12 +39,16 @@ export const CreateProduct: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Cadastrar novo produto</h1>
+    <S_Wrapper>
+      <S_Header>
+        <h1>Cadastrar novo produto</h1>
 
-      <button onClick={() => navigate("/admin")}>Voltar</button>
+        <S.StyledButton onClick={() => navigate("/admin")}>
+          Voltar
+        </S.StyledButton>
+      </S_Header>
 
-      <form onSubmit={onSubmit}>
+      <S.StyledForm onSubmit={onSubmit}>
         <TextField
           label="Título"
           name="title"
@@ -70,7 +76,7 @@ export const CreateProduct: React.FC = () => {
           variant="outlined"
         />
         <button type="submit">Cadastrar</button>
-      </form>
-    </div>
+      </S.StyledForm>
+    </S_Wrapper>
   );
 };
