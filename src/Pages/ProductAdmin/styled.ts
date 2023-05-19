@@ -23,7 +23,6 @@ export const MinimalButton = styled(StyledButton)`
 `;
 
 export const StyledForm = styled.form`
-  margin-top: 48px;
   padding: 48px;
   display: flex;
   flex-direction: column;

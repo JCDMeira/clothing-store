@@ -5,7 +5,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { ProductModel } from "../../../../../model";
 import { InputNumer } from "../../../../../Components";
 
-// import { Container } from './styles';
+import * as S from "../../../styled";
 
 export const Info: React.FC = () => {
   const navigate = useNavigate();
@@ -61,36 +61,34 @@ export const Info: React.FC = () => {
   );
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <TextField
-          label="Título"
-          name="title"
-          variant="outlined"
-          value={productForm.title}
-          onChange={onChange}
-        />
-        <TextField
-          label="Url da imagem"
-          name="photo"
-          variant="outlined"
-          value={productForm.photo}
-          onChange={onChange}
-        />
-        <TextField
-          name={"price"}
-          label={"Preço"}
-          value={productForm.price}
-          onChange={onChange}
-          id="formatted-numberformat-input"
-          InputProps={{
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            inputComponent: InputNumer as any,
-          }}
-          variant="outlined"
-        />
-        <button type="submit">Editar</button>
-      </form>
-    </div>
+    <S.StyledForm onSubmit={onSubmit}>
+      <TextField
+        label="Título"
+        name="title"
+        variant="outlined"
+        value={productForm.title}
+        onChange={onChange}
+      />
+      <TextField
+        label="Url da imagem"
+        name="photo"
+        variant="outlined"
+        value={productForm.photo}
+        onChange={onChange}
+      />
+      <TextField
+        name={"price"}
+        label={"Preço"}
+        value={productForm.price}
+        onChange={onChange}
+        id="formatted-numberformat-input"
+        InputProps={{
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          inputComponent: InputNumer as any,
+        }}
+        variant="outlined"
+      />
+      <S.StyledButton type="submit">Editar</S.StyledButton>
+    </S.StyledForm>
   );
 };
