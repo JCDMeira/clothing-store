@@ -15,8 +15,6 @@ export const ProductDetail: React.FC = () => {
     getOneProduct(id as string);
   }, [getOneProduct, id]);
 
-  console.log(product);
-
   return (
     <S_Wrapper>
       <S_Header>

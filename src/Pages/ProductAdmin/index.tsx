@@ -8,6 +8,8 @@ import {
 import { useProductsStore } from "../../Stores";
 import { ProductModel } from "../../model";
 import { useNavigate } from "react-router-dom";
+import { S_Header, S_Wrapper } from "../../styles/components";
+import * as S from "./styled";
 
 export const ProductAdmin: React.FC = () => {
   const products = useProductsStore((state) => state.products);
@@ -62,7 +64,7 @@ export const ProductAdmin: React.FC = () => {
         headerAlign: "center",
         renderCell: (params: GridRenderCellParams<ProductModel>) => (
           <div>
-            <button
+            <S.MinimalButton
               onClick={() =>
                 navigate(`edit/${params.row._id}`, {
                   state: { product: params.row },
@@ -70,9 +72,11 @@ export const ProductAdmin: React.FC = () => {
               }
             >
               Edit
-            </button>
+            </S.MinimalButton>
 
-            <button onClick={() => deletProduct(params.row._id)}>Delete</button>
+            <S.MinimalButton onClick={() => deletProduct(params.row._id)}>
+              Delete
+            </S.MinimalButton>
           </div>
         ),
       },
@@ -81,32 +85,33 @@ export const ProductAdmin: React.FC = () => {
   );
 
   return (
-    <div>
-      <h1>admin</h1>
+    <S_Wrapper>
+      <S_Header>
+        <h1>Admin</h1>
 
-      <br />
+        <S.StyledButton onClick={() => navigate("create")}>
+          Criar novo item
+        </S.StyledButton>
+      </S_Header>
 
-      <button onClick={() => navigate("create")}>Criar novo item</button>
-      <br />
-      <br />
-      <br />
-
-      {products.length > 0 && (
-        <DataGrid
-          getRowId={(row) => row._id}
-          rows={products}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 10,
+      <S.Content>
+        {products.length > 0 && (
+          <DataGrid
+            getRowId={(row) => row._id}
+            rows={products}
+            columns={columns}
+            initialState={{
+              pagination: {
+                paginationModel: {
+                  pageSize: 10,
+                },
               },
-            },
-          }}
-          pageSizeOptions={[10]}
-          disableRowSelectionOnClick
-        />
-      )}
-    </div>
+            }}
+            pageSizeOptions={[10]}
+            disableRowSelectionOnClick
+          />
+        )}
+      </S.Content>
+    </S_Wrapper>
   );
 };
