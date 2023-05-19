@@ -8,7 +8,6 @@ export const getProducts = async () => {
     ...product,
     title: product.title[0].toUpperCase() + product.title.substr(1),
   }));
-  console.log(formatedData);
 
   return formatedData;
 };

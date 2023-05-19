@@ -15,6 +15,8 @@ export const ProductDetail: React.FC = () => {
     getOneProduct(id as string);
   }, [getOneProduct, id]);
 
+  console.log(product);
+
   return (
     <S_Wrapper>
       <S_Header>
@@ -31,11 +33,11 @@ export const ProductDetail: React.FC = () => {
           <img src={product.photo} alt={product.title} />
         </S.ImageContainer>
 
-        <h1>R$: {product.price.toFixed(2)}</h1>
+        <h1>R$: {product?.price?.toFixed(2)}</h1>
 
         <S.Container>
           <h1>Conjuntos possíveis</h1>
-          {product.sets.map((set) => (
+          {product.sets?.map((set) => (
             <h2>
               {set.title} - R$: {set.price.toFixed(2)}
             </h2>
@@ -44,7 +46,7 @@ export const ProductDetail: React.FC = () => {
 
         <S.Container>
           <h1>Modificações comuns</h1>
-          {product.modifiers.map((mod) => (
+          {product.modifiers?.map((mod) => (
             <h2>
               {mod.title} - R$: {mod.price.toFixed(2)}
             </h2>
