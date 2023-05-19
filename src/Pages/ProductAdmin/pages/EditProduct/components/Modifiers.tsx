@@ -4,6 +4,12 @@ import { useLocation, useParams } from "react-router-dom";
 import { ProductModel } from "../../../../../model";
 import { TextField } from "@mui/material";
 import { InputNumer } from "../../../../../Components";
+import * as S from "../../../styled";
+
+const defaultFormValues = {
+  title: "",
+  price: "",
+};
 
 export const Modifiers: React.FC = () => {
   const { state } = useLocation();
@@ -18,10 +24,7 @@ export const Modifiers: React.FC = () => {
     Product?.modifiers || []
   );
 
-  const [formModifiers, SetFormModifiers] = useState({
-    title: "",
-    price: "",
-  });
+  const [formModifiers, SetFormModifiers] = useState(defaultFormValues);
 
   useEffect(() => {
     if (!state?.product && id !== product?._id) {
@@ -77,13 +80,15 @@ export const Modifiers: React.FC = () => {
         ...current,
         { title: formModifiers.title, price: Number(formModifiers.price) },
       ]);
+
+      SetFormModifiers(defaultFormValues);
     },
     [Product, editProduct, formModifiers, product, state?.product]
   );
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
+    <>
+      <S.StyledForm onSubmit={onSubmit}>
         <TextField
           label="Título"
           name="title"
@@ -104,16 +109,19 @@ export const Modifiers: React.FC = () => {
           variant="outlined"
         />
         <button type="submit">Adicionar conjunto</button>
-      </form>
+      </S.StyledForm>
 
-      <div>
-        <h1 style={{ margin: "50px" }}>Modificações comuns</h1>
+      <S.ListWrapper>
+        <h2 style={{ margin: "24px 48px" }}>Modificações comuns</h2>
         {currentModifiers.map((mod) => (
-          <span key={mod.title + mod.price + Math.random()}>
+          <span
+            style={{ margin: "10px 48px" }}
+            key={mod.title + mod.price + Math.random()}
+          >
             {mod.title} - R$ {mod.price.toFixed(2)}
           </span>
         ))}
-      </div>
-    </div>
+      </S.ListWrapper>
+    </>
   );
 };

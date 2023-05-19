@@ -4,6 +4,12 @@ import { useLocation, useParams } from "react-router-dom";
 import { ProductModel } from "../../../../../model";
 import { TextField } from "@mui/material";
 import { InputNumer } from "../../../../../Components";
+import * as S from "../../../styled";
+
+const defaultFormValues = {
+  title: "",
+  price: "",
+};
 
 export const Sets: React.FC = () => {
   const { state } = useLocation();
@@ -16,10 +22,7 @@ export const Sets: React.FC = () => {
 
   const [currentSets, setCurrentSet] = useState(Product?.sets || []);
 
-  const [formSets, SetFormSets] = useState({
-    title: "",
-    price: "",
-  });
+  const [formSets, SetFormSets] = useState(defaultFormValues);
 
   useEffect(() => {
     if (!state?.product && id !== product?._id) {
@@ -69,13 +72,15 @@ export const Sets: React.FC = () => {
         ...current,
         { title: formSets.title, price: Number(formSets.price) },
       ]);
+
+      SetFormSets(defaultFormValues);
     },
     [Product, editProduct, formSets, product, state?.product]
   );
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
+    <>
+      <S.StyledForm onSubmit={onSubmit}>
         <TextField
           label="Título"
           name="title"
@@ -95,18 +100,21 @@ export const Sets: React.FC = () => {
           }}
           variant="outlined"
         />
-        <button type="submit">Adicionar conjunto</button>
-      </form>
+        <S.StyledButton type="submit">Adicionar conjunto</S.StyledButton>
+      </S.StyledForm>
 
-      <div>
-        <h1 style={{ margin: "50px" }}>Conjuntos possíveis</h1>
+      <S.ListWrapper>
+        <h2 style={{ margin: "24px 48px" }}>Conjuntos possíveis</h2>
 
         {currentSets.map((set) => (
-          <span key={set.title + set.price + Math.random()}>
+          <span
+            style={{ margin: "10px 48px" }}
+            key={set.title + set.price + Math.random()}
+          >
             {set.title} - R$ {set.price.toFixed(2)}
           </span>
         ))}
-      </div>
-    </div>
+      </S.ListWrapper>
+    </>
   );
 };

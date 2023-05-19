@@ -42,3 +42,8 @@ export const StyledForm = styled.form`
     }
   }
 `;
+
+export const ListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
