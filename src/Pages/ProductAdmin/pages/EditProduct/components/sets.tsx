@@ -28,7 +28,7 @@ export const Sets: React.FC = () => {
     if (!state?.product && id !== product?._id) {
       getOneProduct(id as string);
     }
-    if (product?._id) setCurrentSet(product.sets);
+    if (product?._id && !state?.product) setCurrentSet(product.sets);
   }, [getOneProduct, id, product, state?.product]);
 
   const onChange = useCallback(

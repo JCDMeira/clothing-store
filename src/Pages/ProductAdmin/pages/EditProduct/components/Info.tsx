@@ -30,7 +30,7 @@ export const Info: React.FC = () => {
     if (!state?.product && id !== product?._id) {
       getOneProduct(id as string);
     }
-    if (product?._id)
+    if (product?._id && !state?.product)
       setProductForm({ ...product, price: String(product.price) });
   }, [getOneProduct, id, product, state?.product]);
 

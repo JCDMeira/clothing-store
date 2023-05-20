@@ -33,7 +33,7 @@ export const Modifiers: React.FC = () => {
     if (!state?.product && id !== product?._id) {
       getOneProduct(id as string);
     }
-    if (product?._id) setCurrentModifiers(product.modifiers);
+    if (product?._id && !state?.product) setCurrentModifiers(product.modifiers);
   }, [getOneProduct, id, product, state?.product]);
 
   const onChange = useCallback(
