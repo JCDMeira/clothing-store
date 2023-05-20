@@ -46,7 +46,7 @@ export const useProductsStore = create<Store>()((set) => ({
       const newProducts = state.products.map((prod) =>
         prod._id === body._id ? body : prod
       );
-      return { products: [...newProducts] };
+      return { products: [...newProducts], product: body };
     });
   },
   deletProduct: async (id: string) => {
