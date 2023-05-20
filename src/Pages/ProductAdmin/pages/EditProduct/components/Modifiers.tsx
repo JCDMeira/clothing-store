@@ -11,6 +11,9 @@ const defaultFormValues = {
   price: "",
 };
 
+//!todo: adicionar verificação de cache para quando atualiza e volta para a página de lista, e então abre novamente a edição
+//!todo: adicionar possibilidade de excluir um elemento do array de set ou modifiers
+
 export const Modifiers: React.FC = () => {
   const { state } = useLocation();
   const { id } = useParams<{ id: string }>();
