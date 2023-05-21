@@ -78,6 +78,16 @@ export const Sets: React.FC = () => {
     [Product, editProduct, formSets, product, state?.product]
   );
 
+  const deleteSet = (index: number) => {
+    setCurrentSet((current) => {
+      const newSet = current.filter((_, i) => i !== index);
+      editProduct({ ...product, sets: newSet });
+      window.history.pushState({ ...product, sets: newSet }, "", undefined);
+
+      return newSet;
+    });
+  };
+
   return (
     <>
       <S.StyledForm onSubmit={onSubmit}>
@@ -106,13 +116,15 @@ export const Sets: React.FC = () => {
       <S.ListWrapper>
         <h2 style={{ margin: "24px 48px" }}>Conjuntos possíveis</h2>
 
-        {currentSets.map((set) => (
-          <span
-            style={{ margin: "10px 48px" }}
-            key={set.title + set.price + Math.random()}
-          >
-            {set.title} - R$ {set.price.toFixed(2)}
-          </span>
+        {currentSets.map((set, index) => (
+          <div key={set.title + set.price + Math.random()}>
+            <span style={{ margin: "10px 48px" }}>
+              {set.title} - R$ {set.price.toFixed(2)}
+            </span>
+            <S.MinimalButton onClick={() => deleteSet(index)}>
+              delete
+            </S.MinimalButton>
+          </div>
         ))}
       </S.ListWrapper>
     </>
