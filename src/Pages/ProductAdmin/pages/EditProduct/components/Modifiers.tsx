@@ -88,6 +88,16 @@ export const Modifiers: React.FC = () => {
     [Product, editProduct, formModifiers, product, state?.product]
   );
 
+  const deleteSet = (index: number) => {
+    setCurrentModifiers((current) => {
+      const newMod = current.filter((_, i) => i !== index);
+      editProduct({ ...product, sets: newMod });
+      window.history.pushState({ ...product, sets: newMod }, "", undefined);
+
+      return newMod;
+    });
+  };
+
   return (
     <>
       <S.StyledForm onSubmit={onSubmit}>
@@ -115,13 +125,15 @@ export const Modifiers: React.FC = () => {
 
       <S.ListWrapper>
         <h2 style={{ margin: "24px 48px" }}>Modificações comuns</h2>
-        {currentModifiers.map((mod) => (
-          <span
-            style={{ margin: "10px 48px" }}
-            key={mod.title + mod.price + Math.random()}
-          >
-            {mod.title} - R$ {mod.price.toFixed(2)}
-          </span>
+        {currentModifiers.map((mod, index) => (
+          <div key={mod.title + mod.price + Math.random()}>
+            <span style={{ margin: "10px 48px" }}>
+              {mod.title} - R$ {mod.price.toFixed(2)}
+            </span>
+            <S.MinimalButton onClick={() => deleteSet(index)}>
+              delete
+            </S.MinimalButton>
+          </div>
         ))}
       </S.ListWrapper>
     </>
