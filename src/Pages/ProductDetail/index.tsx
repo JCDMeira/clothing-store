@@ -1,10 +1,14 @@
-import React, { useEffect } from "react";
+import React, { lazy, useEffect } from "react";
 import { useProductsStore } from "../../Stores";
 import { Link, useParams } from "react-router-dom";
-import { Title } from "../../Components";
 import { S_Header, S_Wrapper } from "../../styles/components";
 import * as S from "./styles";
 
+const Title = lazy(() =>
+  import("../../Components").then(({ Title }) => ({
+    default: Title,
+  }))
+);
 export const ProductDetail: React.FC = () => {
   const product = useProductsStore((state) => state.product);
   const getOneProduct = useProductsStore((state) => state.getOneProduct);

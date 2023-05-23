@@ -1,10 +1,20 @@
-import { TextField } from "@mui/material";
-import React, { SyntheticEvent, useState } from "react";
-import { InputNumer } from "../../../Components";
+import React, { SyntheticEvent, lazy, useState } from "react";
 import { useProductsStore } from "../../../Stores";
 import { useNavigate } from "react-router-dom";
 import { S_Header, S_Wrapper } from "../../../styles/components";
 import * as S from "../styled";
+
+const TextField = lazy(() =>
+  import("@mui/material").then(({ TextField }) => ({
+    default: TextField,
+  }))
+);
+
+const InputNumer = lazy(() =>
+  import("../../../Components").then(({ InputNumer }) => ({
+    default: InputNumer,
+  }))
+);
 
 export const CreateProduct: React.FC = () => {
   const navigate = useNavigate();
