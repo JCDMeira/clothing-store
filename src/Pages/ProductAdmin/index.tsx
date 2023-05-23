@@ -1,19 +1,15 @@
-import React, { lazy, useEffect, useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
+import {
+  DataGrid,
+  GridColDef,
+  GridRenderCellParams,
+  GridValueGetterParams,
+} from "@mui/x-data-grid";
 import { useProductsStore } from "../../Stores";
 import { ProductModel } from "../../model";
 import { useNavigate } from "react-router-dom";
 import { S_Header, S_Wrapper } from "../../styles/components";
 import * as S from "./styled";
-import {
-  GridColDef,
-  GridRenderCellParams,
-  GridValueGetterParams,
-} from "@mui/x-data-grid";
-const DataGrid = lazy(() =>
-  import("@mui/x-data-grid").then(({ DataGrid }) => ({
-    default: DataGrid,
-  }))
-);
 
 export const ProductAdmin: React.FC = () => {
   const products = useProductsStore((state) => state.products);

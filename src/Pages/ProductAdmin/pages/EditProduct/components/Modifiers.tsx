@@ -1,30 +1,17 @@
-import React, {
-  SyntheticEvent,
-  lazy,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import React, { SyntheticEvent, useCallback, useEffect, useState } from "react";
 import { useProductsStore } from "../../../../../Stores";
 import { useLocation, useParams } from "react-router-dom";
 import { ProductModel } from "../../../../../model";
+import { TextField } from "@mui/material";
+import { InputNumer } from "../../../../../Components";
 import * as S from "../../../styled";
-
-const InputNumer = lazy(() =>
-  import("../../../../../Components").then(({ InputNumer }) => ({
-    default: InputNumer,
-  }))
-);
-const TextField = lazy(() =>
-  import("@mui/material").then(({ TextField }) => ({
-    default: TextField,
-  }))
-);
 
 const defaultFormValues = {
   title: "",
   price: "",
 };
+
+//!todo: adicionar possibilidade de excluir um elemento do array de set ou modifiers
 
 export const Modifiers: React.FC = () => {
   const { state } = useLocation();

@@ -1,25 +1,10 @@
-import React, { lazy } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import Tabs from "@mui/base/Tabs";
 import * as S from "./styles";
+import { Info, Modifiers, Sets } from "./components";
 import { S_Header, S_Wrapper } from "../../../../styles/components";
 import * as SF from "../../styled";
-
-const Tabs = lazy(() => import("@mui/base/Tabs"));
-const Info = lazy(() =>
-  import("./components").then(({ Info }) => ({
-    default: Info,
-  }))
-);
-const Modifiers = lazy(() =>
-  import("./components").then(({ Modifiers }) => ({
-    default: Modifiers,
-  }))
-);
-const Sets = lazy(() =>
-  import("./components").then(({ Sets }) => ({
-    default: Sets,
-  }))
-);
 
 export const EditProduct: React.FC = () => {
   const navigate = useNavigate();

@@ -1,13 +1,8 @@
-import React, { lazy } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Title } from "../../Components";
 import * as S from "./styles";
 import blazer from "../../Assets/blazer.avif";
-
-const Title = lazy(() =>
-  import("../../Components").then(({ Title }) => ({
-    default: Title,
-  }))
-);
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();
