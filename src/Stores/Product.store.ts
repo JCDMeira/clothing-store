@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { ProductCreateModel, ProductModel } from "../model";
+import { ProductCreateModel, ProductModel, ProductsFormated } from "../model";
 import {
   createProduct,
   deleteProduct,
@@ -9,21 +9,18 @@ import {
 } from "../Api";
 
 type Store = {
-  products: ProductModel[];
-  product: ProductModel;
+  products: ProductsFormated[];
+  product: ProductsFormated;
   getOneProduct: (id: string) => void;
   getProducts: () => void;
-  createProduct: (body: ProductCreateModel) => Promise<{
-    message: string;
-    product: ProductModel;
-  }>;
+  createProduct: (body: ProductCreateModel) => Promise<ProductsFormated>;
   editProduct: (body: ProductModel) => Promise<void>;
   deletProduct: (id: string) => void;
 };
 
 export const useProductsStore = create<Store>()((set) => ({
   products: [],
-  product: {} as ProductModel,
+  product: {} as ProductsFormated,
   getProducts: async () => {
     const products = await getProducts();
     set({ products });
@@ -35,7 +32,7 @@ export const useProductsStore = create<Store>()((set) => ({
   createProduct: async (body: ProductCreateModel) => {
     const newProduct = await createProduct(body);
 
-    set((state) => ({ products: [...state.products, newProduct.product] }));
+    set((state) => ({ products: [...state.products, newProduct] }));
 
     return newProduct;
   },
@@ -43,10 +40,21 @@ export const useProductsStore = create<Store>()((set) => ({
     await editProduct(body);
 
     set((state) => {
+      const newProduct = {
+        ...body,
+        formatedPrice: `R$ ${body.price.toFixed(2)}`,
+        title: body.title[0].toUpperCase() + body.title.substr(1),
+      };
       const newProducts = state.products.map((prod) =>
-        prod._id === body._id ? body : prod
+        prod._id === body._id
+          ? newProduct
+          : {
+              ...prod,
+              formatedPrice: `R$ ${prod.price.toFixed(2)}`,
+              title: prod.title[0].toUpperCase() + prod.title.substr(1),
+            }
       );
-      return { products: [...newProducts], product: body };
+      return { products: [...newProducts], product: newProduct };
     });
   },
   deletProduct: async (id: string) => {
