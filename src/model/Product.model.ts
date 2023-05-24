@@ -18,3 +18,5 @@ export interface ProductCreateModel {
   title: string;
   price: number;
 }
+
+export type ProductsFormated = { formatedPrice: string } & ProductModel;

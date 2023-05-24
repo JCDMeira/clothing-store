@@ -51,7 +51,7 @@ export const ProductAdmin: React.FC = () => {
         headerAlign: "center",
         editable: false,
         valueGetter: (params: GridValueGetterParams) =>
-          "R$ " + Number(params.row.price).toFixed(2),
+          params.row.formatedPrice,
       },
       {
         field: "actions",

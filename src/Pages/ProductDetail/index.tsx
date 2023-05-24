@@ -31,7 +31,7 @@ export const ProductDetail: React.FC = () => {
           <img src={product.photo} alt={product.title} />
         </S.ImageContainer>
 
-        <h1>R$: {product?.price?.toFixed(2)}</h1>
+        <h1>R$: {product?.formatedPrice}</h1>
 
         <S.Container>
           <h1>Conjuntos possíveis</h1>
